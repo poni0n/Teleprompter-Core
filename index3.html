@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
-	Teleprompter
-	Copyright (C) 2018 Imaginary Sense, Imaginary Films LLC and contributors
+	Imaginary Teleprompter
+	Copyright (C) 2017 Imaginary Sense, Imaginary Films LLC and contributors
 	
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -19,39 +19,22 @@
 <html>
 <head>
 	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Imaginary Teleprompter 3</title>
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="css3/reset.css">
-	<link rel="stylesheet" href="css3/bootstrap.min.css">
-	<link rel="stylesheet" href="css3/docs.min.css">
-	<link rel="stylesheet" href="css3/bootstrap-slider.min.css">
-	<link rel="stylesheet" href="css3/editor.css">
-	<link rel="stylesheet" href="css3/prompt.css">
-	<link rel="stylesheet" href="css3/teleprompter-themes.css">
-	<link rel="stylesheet" href="css3/mobilehide.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/editor.css" crossorigin="anonymous">
+	<link rel="icon" href="img/logo_17_sm.png" type="image/png-icon">
+	<!-- <link rel="stylesheet" href="css/teleprompter.css" crossorigin="anonymous"> -->
 	<script src="ckeditor/ckeditor.js"></script>
-	</head>
+</head>
 <body>
-	<div id="wrapper" class="toggled hidden-sm">
-		<!-- Sidebar -->
-		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav" id="scripts">
-			</ul>
-				<!--<ul class="sidebar-nav" id="images">
-					<li class="sidebar-brand">Images</li>
-				</ul>-->
-		</div>
-	</div>
 	<div id="siteTop" class="container-fluid">
 		<div class="row">
-			<div class="col-12 col-lg-auto col-xl-8">
+    		<div class="col-12 col-lg-auto col-xl-8">
 				<nav class="navbar navbar-expand-md navbar-light bg-light">
 					<a class="navbar-brand" href="#">
 						<img src="img/logo_17_sm.png" width="30" height="30" class="d-inline-block align-top" alt="">
-						Imaginary <span class="d-none d-sm-inline">Teleprompter</span>  
+						Imaginary <span class="d-none d-sm-inline">Teleprompter</span>	
 					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">  
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">	
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -94,12 +77,12 @@
 									<a class="dropdown-item" target="_blank" href="http://imaginary.tech/teleprompter/">Visit Teleprompter's Website</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#about">About Imaginary Teleprompter</a>
-									<a class="dropdown-item" href="#credits" id="credits-link">Play Credits</a>
+									<a class="dropdown-item" href="#credits">Play Credits</a>
 								</div>
 							</li>
 						</ul>
 						<!-- <ul class="navbar-nav nav-pills ml-auto" id="promptControls"> -->
-		<!--          <li class="nav-item">
+		<!-- 					<li class="nav-item">
 								<a class="nav-link square" id="settings-tab" data-toggle="tab" role="tab" aria-controls="settings" aria-selected="false" href="#settings">S</a>
 							</li>
 							<li class="nav-item">
@@ -118,8 +101,8 @@
 						<!-- <img src="#" width="30" height="30" class="d-inline-block align-top" alt=""> -->
 					</div>
 				</nav>
-			</div>
-			<div class="col-lg-auto col-xl-4 mr-auto">
+		    </div>
+		    <div class="col-lg-auto col-xl-4 mr-auto">
 				<ul class="nav mr-auto nav-tabs ml-auto tab-bottom" id="setupTabs" role="tablist">
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" role="tab" href="#tabs-closed" aria-controls="tabs-closed" aria-selected="true">X</a>
@@ -134,19 +117,19 @@
 						<a class="nav-link" data-toggle="tab" role="tab" href="#images" aria-controls="images" aria-selected="false">I</a>
 					</li>
 					<li class="nav-item /*d-none*/">
-						<a class="nav-link" data-toggle="tab" role="tab" href="#update" id="updateIt">
+						<a class="nav-link" data-toggle="tab" role="tab" href="#update">
 							<span class="d-none d-sm-inline d-lg-none d-xl-inline">Update</span>
 							<span class="d-inline d-sm-none d-lg-inline d-xl-none">U</span>
 						</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" data-toggle="tab" role="tab" href="#prompt" id="promptIt">
-							<span class="d-none d-sm-inline d-lg-none d-xl-inline">Prompt</span>
-							<span class="d-inline d-sm-none d-lg-inline d-xl-none">P</span>
+						<a class="nav-link" data-toggle="tab" role="tab" href="#prompt">
+							<span class="d-none d-sm-inline d-lg-none d-xl-inline">Close</span>
+							<span class="d-inline d-sm-none d-lg-inline d-xl-none">C</span>
 						</a>
 					</li>
 				</ul>
-			</div>
+		    </div>
 		</div>
 	</div>
 	<div class="tab-content" id="setupTabsContent">
@@ -233,8 +216,8 @@
 							<label for="timer">Timer</label>
 						</small><br>
 						<div id="timer" class="btn-group  btn-group-sm btn-toggle"> 
-							<button class="btn btn-default">On</button>
-							<button class="btn btn-primary active">Off</button>
+						    <button class="btn btn-default">On</button>
+						    <button class="btn btn-primary active">Off</button>
 						</div>
 					</div>
 					<div class='col-sm-3'>
@@ -242,8 +225,8 @@
 							<label for="timer">Remote <span class="d-sm-none d-md-inline">Control</span></label>
 						</small><br>
 						<div id="timer" class="btn-group  btn-group-sm btn-toggle"> 
-							<button class="btn btn-default">On</button>
-							<button class="btn btn-primary active">Off</button>
+						    <button class="btn btn-default">On</button>
+						    <button class="btn btn-primary active">Off</button>
 						</div>
 					</div>
 					<div class='col-sm-3'>
@@ -251,18 +234,18 @@
 							<label for="timer">Speech <span class="d-sm-none d-md-inline">Recognition</span></label>
 						</small><br>
 						<div id="timer" class="btn-group  btn-group-sm btn-toggle"> 
-							<button class="btn btn-default">On</button>
-							<button class="btn btn-primary active">Off</button>
+						    <button class="btn btn-default">On</button>
+						    <button class="btn btn-primary active">Off</button>
 						</div>
 					</div>
 					<!--
-					<div class='col-md-1 col-sm-1'>
+ 					<div class='col-md-1 col-sm-1'>
 						<small>
 							<label for="timer">Timer</label>
 						</small><br>
 						<div id="timer" class="btn-group  btn-group-sm btn-toggle"> 
-							<button class="btn btn-default">I</button>
-							<button class="btn btn-primary active">O</button>
+						    <button class="btn btn-default">I</button>
+						    <button class="btn btn-primary active">O</button>
 						</div>
 					</div>
 					<div class='col-md-1 col-sm-1'>
@@ -270,7 +253,7 @@
 							<label for="timer">Voice</label>
 						</small><br>
 						<div id="timer" class="btn-group btn-group-sm btn-toggle"> 
-							<button class="btn btn-default">Inactive</button>
+						    <button class="btn btn-default">Inactive</button>
 						</div>
 					</div>
 					-->
@@ -298,7 +281,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<input type="button" name="load_image">       
+						<input type="button" name="load_image">				
 					</div>
 				</div>
 				<div class="row">
@@ -379,288 +362,97 @@
 		</article>
 	</div>
 	<div id="statusbar"></div>
-	<div id="devWarning" class="modalDialog">
-		<div style="width: 50%;">
-			<div class="panel panel-default">
-				<a href="#close" title="Close" id="closeWarning" class="close">X</a>
-				<div class="panel-heading">
-					<h1>Warning <small>Teleprompter</small></h1>
-				</div>
-				<div class="panel-body">
-					<p class="text-center">You're about to use a development version of Teleprompter. This means you may find bugs, incomplete and experimental features. You may even suffer from data lost. By agreeing to these terms your previous data will migrate to this version and older versions won't be able to access it.</p>
-					<br>
-					<p class="text-center">Do you agree to these terms in order to use our development version?</p>
-				</div>
-				<div class="panel-footer">
-					<ul class="pager" style="margin:0;">
-						<li><button type="button" class="btn btn-success" id="agreeWarningButton">Agree</button></li>
-						<li><button type="button" class="btn btn-danger" id="cancelWarningButton">Cancel</button></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="devNewestVersion" class="modalDialog">
-		<div style="width: 50%;">
-			<div class="panel panel-default">
-				<a href="#close" title="Close" class="close">X</a>
-				<div class="panel-heading">
-					<h1>Warning <small>Teleprompter</small></h1>
-				</div>
-				<div class="panel-body">
-					<p class="text-center">A newer version of the Teleprompter was already in use,<br> please use the lastest version instead of this one.</p>
-				</div>
-				<div class="panel-footer">
-					<ul class="pager" style="margin:0;">
-						<li><button type="button" class="btn btn-danger" id="cancelNewestButton">Exit App</button></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="sidebarDeleteElement" class="modalDialog">
-		<div style="width: 50%;">
-			<div class="panel panel-default">
-				<a href="#close" title="Close" class="close">X</a>
-				<div class="panel-heading">
-					<h1>Delete <small>Teleprompter</small></h1>
-				</div>
-				<div class="panel-body">
-					<p class="text-center">Are you sure do you want to delete the script?</p>
-				</div>
-				<div class="panel-footer">
-					<ul class="pager" style="margin:0;">
-							<li><button type="button" class="btn btn-default" id="cancelSidebarButton">Cancel</button></li>
-							<li><button type="button" class="btn btn-danger" id="deleteSidebarButton">Delete</button></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="sidebarAddElement" class="modalDialog">
-		<div style="width: 50%;">
-			<div class="panel panel-default">
-				<a href="#close" title="Close" class="close">X</a>
-				<div class="panel-heading">
-					<h1>Scripts <small>Teleprompter</small></h1>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-12">
-							<form class="form-horizontal">
-								<div class="form-group">
-									<label for="inputName" class="col-sm-2 control-label">Title</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="inputName" placeholder="Title" pattern="/([ -z])+/g" required>
-									</div>
-								</div>
-								<div class="form-group hidden">
-									<label for="inputID" class="col-sm-2 control-label">ID</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="inputID" placeholder="title" disabled>
-									</div>
-								</div>
-								<!-- Remove hidden class to use these debugging fields. -->
-								<div class="form-group hidden">
-									<div class="col-sm-offset-2 col-sm-10">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" checked> Deletable
-											</label>
-											<label>
-												<input type="checkbox" checked> Editable
-											</label>
-										</div>
-									</div>
-								</div>
-								<div class="panel-footer">
-									<ul class="pager" style="margin:0;">
-										<li><input type="submit" class="btn btn-default" id="addScriptSidebarButton" value="Add Script"></li>
-										<li><button class="btn btn-danger" id="cancelSidebarButton2">Cancel</button></li>
-									</ul>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- ColorPicker modal dialog -->
-	<div id="openCustomStyles" class="modalDialog">
-		<div style="width: 84%;">
+	<script src="js/jquery.slim.min.js" crossorigin="anonymous"></script>
+	<script src="js/popper.js" crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<!-- <script src="node_modules/@ckeditor/ckeditor5-build-inline/build/ckeditor.js" crossorigin="anonymous"></script> -->
+	<script>
+	// CKEDITOR 5 SETUP
+    // InlineEditor
+    //     .create( document.querySelector( '#prompt' ) )
+    //     .catch( error => {
+    //         console.error( error );
+    //     } );
 
-			<div class="panel panel-default">
-				<a title="Close" class="close" onclick="closePromptStyles();">X</a>
-				<div class="panel-heading">
-					<h1>Custom Styles <small>Administration Panel</small></h1>
-				</div>
-				<div class="panel-body" style="padding-top: 0px;">
-					<div class="row" style="margin-top: -10px;">
-						<div class="col-md-3">
-							<h1><small>Styles</small></h1>
-							<div class="panel panel-default">
-								<div id="stylesContainer">
-									<table class="table table-bordered" id="stylesTable" >
-										<tbody>
-											<tr>
-												<th class="table-item"><span>No Styles</span></th>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-9">
-							<h1><small>Properties</small></h1>
-							<div class='row'>
-								<div class='col-md-4'>
-									<label>Body</label>
-									<input type="text" class="form-control jscolor" onchange="updateColorOnPreview(this)" id="bodyColor" value="" >
-								</div>
-								<div class='col-md-4'>
-									<label>Overlay</label>
-									<input type="text" class="form-control jscolor" onchange="updateColorOnPreview(this)" id="overlayColor" value="" >
-								</div>
-								<div class='col-md-4'>
-									<label>Text Color</label>
-									<input type="text" class="form-control jscolor" onchange="updateColorOnPreview(this)" id="textColor" value="" >
-								</div>
-							</div>
-							<h1><small>Preview</small></h1>
-							<div id="promptPreviewColor">
-								<!-- #overlay layers focus area on top of the prompt. -->
-								<table cellpadding="0" cellspacing="0" id="overlayPreview" >
-									<tbody>
-										<tr id="overlayTop" style = "background-color:#000;opacity:0.5;">
-											<td>Text</td>
-										</tr>
-										<tr id="overlayFocus" >
-											<td>Text</td>
-										</tr>
-										<tr id="overlayBottom" class="overlayBg" style = "background-color:#000;opacity:0.5;">
-											<td>Text</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							</br>
-							<div class='row'>
-								<div class='col-md-4'>
-									<div class="input-group">
-										<span class="input-group-addon" id="basic-addon1">Style Name</span>
-										<input type="text"  class="form-control" placeholder="name" aria-describedby="basic-addon1" id="nameStyle">
-									</div>
-								</div>
-								<div class='col-md-8'>
-									<button class="btn btn-default" id="editStyleButton" disabled>Update Style</button>
-									<button class="btn btn-default" id="addStyleButton" disabled>New Style</button>
-									<button class="btn btn-default" id="removeStyleButton" disabled>Delete Style</button>
-									<button class="btn btn-default" id="defaultStyleButton">Set As Default</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	// CKEDITOR 4 SETUP
+	if (typeof CKEDITOR!=="undefined") {
+		// Turn off automatic editor creation first.
+		CKEDITOR.disableAutoInline = true;
+		// Create editor
+		CKEDITOR.inline( 'prompt', {
+			// To enable source code editing in a dialog window, inline editors require the "sourcedialog" plugin.
+			extraPlugins: 'image2,sharedspace,sourcedialog',
+			removePlugins: 'floatingspace,maximize,resize',
+			sharedSpaces: {
+				top: 'toolbar',
+				bottom: 'statusbar'
+			},
+			toolbarGroups: [
+			{ name: 'document',    groups: [ 'document', 'print', 'mode', 'tools' ] },
+			{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+			{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+			{ name: 'insert' },
+			{ name: 'others' },
+			{ name: 'colors' },
+			{ name: 'about' },
+			'/',
+			{ name: 'links' },
+			{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+			{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+			{ name: 'styles' }
+			],
+
+			// Remove the redundant buttons from toolbar groups defined above.
+			removeButtons: 'Save,Smiley,ShowBlocks,Unlink,Link,Blockquote,CreateDiv,PageBreak,Language,Styles',/*,Styles,Specialchar*/
+			// Font sizes
+			fontSize_sizes: '0.7 em/0.7em;0.8 em/0.8em;0.9 em/0,9em;1.0 em/1em;1.1 em/1.1em;1.2 em/1.2em;1.3 em/1.3em;1.4 em/1.4em;1.5 em/1.5em;1.6 em/1.6em;1.7 em/1.7em;1.8 em/1.8em;1.9 em/1.9em;2.0 em/2em;2.1 em/2.1em;2.2 em/2.2em;2.3 em/2.3em;2.4 em/2.4em;2.5 em/2.5em;2.6 em/2.6em;2.7 em/2.7em;2.8 em/2.8em;2.9 em/2.9em;3.0 em/3em',
+			// Font sizes
+			line_height: '1 em/1em;1.1 em/1.1em;1.2 em/1.2em;1.3 em/1.3em;1.4 em/1.4em;1.5 em/1.5em;1.6 em/1.6em;1.7 em/1.7em;1.8 em/1.8em;1.9 em/1.9em;2.0 em/2.0em',
+			// Quick tables
+			qtRows: 10, // Count of rows
+			qtColumns: 10, // Count of columns
+			qtBorder: '0', // Border of inserted table
+			qtWidth: '100%', // Width of inserted table
+			qtCellPadding: '0', // Cell padding table
+			qtCellSpacing: '0', // Cell spacing table
+		});
+	}
+	/* CKEDITOR 4 Dialog Defaults */
+	CKEDITOR.on( 'dialogDefinition', function( ev ) {
+		var dialogName = ev.data.name;
+		var dialogDefinition = ev.data.definition;
+		console.log(dialogName);
+		if ( dialogName == 'table' ) {
+			var info = dialogDefinition.getContents( 'info' );
+			console.log(info);      
+			info.get( 'txtWidth' )[ 'default' ] = '100%';
+			info.get( 'txtBorder' )[ 'default' ] = '0';
+			info.get( 'txtRows' )[ 'default' ] = '1';
+			info.get( 'txtCols' )[ 'default' ] = '3';
+			info.get( 'txtCellSpace' )[ 'default' ] = '0';
+			info.get( 'txtCellPad' )[ 'default' ] = '0';
+		}
+		if ( dialogName == 'iframe' ) {
+			var info = dialogDefinition.getContents( 'info' );
+			console.log(info);
+			info.get( 'width' )[ 'default' ] = '100%';
+			info.get( 'height' )[ 'default' ] = '50%';
+		}
+		if ( dialogName == 'flash' ) {
+			var info = dialogDefinition.getContents( 'info' );
+			console.log(info);
+			info.get( 'width' )[ 'default' ] = '100%';
+			info.get( 'height' )[ 'default' ] = '50%';
+			info.get( 'hSpace' )[ 'default' ] = '0';
+			info.get( 'vSpace' )[ 'default' ] = '0';
+		}
+		if ( dialogName == 'image2' ) {
+			var info = dialogDefinition.getContents( 'info' );
+			console.log(info);  
+			info.get( 'width' )[ 'default' ] = '100%';
+			info.get( 'height' )[ 'default' ] = 'auto';
+		}
+	});
+	</script>
 </body>
-<!-- <script src="js3/jquery.slim.min.js" crossorigin="anonymous"></script> -->
-<!-- <script src="js3/popper.js" crossorigin="anonymous"></script> -->
-<!-- <script src="js3/bootstrap.min.js" crossorigin="anonymous"></script> -->
-<!-- <script src="node_modules/@ckeditor/ckeditor5-build-inline/build/ckeditor.js" crossorigin="anonymous"></script> -->
-<script src="js3/jquery.min.js"></script>
-<script src="js3/data.manager.js"></script>
-<script src="js3/sidebar.js"></script>
-<script src="js3/teleprompter-themes.js"></script>
-<script src="js3/editor.js"></script>
-<script src="js3/bootstrap.min.js"></script>
-<script src="js3/bootstrap-slider.min.js"></script>
-<!--<script src="js3/jquery.qrcode.js"></script>-->
-<script src="js3/jscolor.min.js"></script>
-<script type="text/javascript">
-if (inElectron()){
-	var {ipcMain} = require('electron');
-	var {shell} = require('electron');
-}
-if (typeof CKEDITOR!=="undefined") {
-			 // Turn off automatic editor creation first.
-			 CKEDITOR.disableAutoInline = true;
-			 // Create editor
-			 CKEDITOR.inline( 'prompt', {
-				  // To enable source code editing in a dialog window, inline editors require the "sourcedialog" plugin.
-				  extraPlugins: 'uploadimage,image2,sharedspace,sourcedialog',
-				  removePlugins: 'floatingspace,maximize,resize',
-				  sharedSpaces: {
-				  	top: 'toolbar',
-				  	bottom: 'statusbar'
-				  },
-				  toolbarGroups: [
-				  { name: 'document',    groups: [ 'document', 'print', 'mode', 'tools' ] },
-				  { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-				  { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-				  { name: 'insert' },
-				  { name: 'others' },
-				  { name: 'colors' },
-				  { name: 'about' },
-				  '/',
-				  { name: 'links' },
-				  { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-				  { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-				  { name: 'styles' }
-				  ],
-
-				  // Remove the redundant buttons from toolbar groups defined above.
-				  removeButtons: 'Save,Smiley,ShowBlocks,Unlink,Link,Blockquote,CreateDiv,PageBreak,Language,Styles',/*,Styles,Specialchar*/
-				  // Font sizes
-				  fontSize_sizes: '0.2 em/0.2em;0.3 em/0.3em;0.4 em/0.4em;0.5 em/0.5em;0.6 em/0.6em;0.7 em/0.7em;0.8 em/0.8em;0.9 em/0,9em;1.0 em/1em;1.1 em/1.1em;1.2 em/1.2em;1.3 em/1.3em;1.4 em/1.4em;1.5 em/1.5em;1.6 em/1.6em;1.7 em/1.7em;1.8 em/1.8em;1.9 em/1.9em;2.0 em/2em;2.1 em/2.1em;2.2 em/2.2em;2.3 em/2.3em;2.4 em/2.4em;2.5 em/2.5em;2.6 em/2.6em;2.7 em/2.7em;2.8 em/2.8em;2.9 em/2.9em;3.0 em/3em',
-				  // Font sizes
-				  line_height: '1 em/1em;1.1 em/1.1em;1.2 em/1.2em;1.3 em/1.3em;1.4 em/1.4em;1.5 em/1.5em;1.6 em/1.6em;1.7 em/1.7em;1.8 em/1.8em;1.9 em/1.9em;2.0 em/2.0em',
-				  // Quick tables
-				  qtRows: 10, // Count of rows
-				  qtColumns: 10, // Count of columns
-				  qtBorder: '0', // Border of inserted table
-				  qtWidth: '100%', // Width of inserted table
-				  qtCellPadding: '0', // Cell padding table
-				  qtCellSpacing: '0', // Cell spacing table
-				});
-
-CKEDITOR.on( 'dialogDefinition', function( ev ) {
-	var dialogName = ev.data.name;
-	var dialogDefinition = ev.data.definition;
-	console.log(dialogName);
-	if ( dialogName == 'table' ) {
-		var info = dialogDefinition.getContents( 'info' );
-		console.log(info);      
-		info.get( 'txtWidth' )[ 'default' ] = '100%';
-		info.get( 'txtBorder' )[ 'default' ] = '0';
-		info.get( 'txtRows' )[ 'default' ] = '1';
-		info.get( 'txtCols' )[ 'default' ] = '3';
-		info.get( 'txtCellSpace' )[ 'default' ] = '0';
-		info.get( 'txtCellPad' )[ 'default' ] = '0';
-	}
-	if ( dialogName == 'iframe' ) {
-		var info = dialogDefinition.getContents( 'info' );
-		console.log(info);
-		info.get( 'width' )[ 'default' ] = '100%';
-		info.get( 'height' )[ 'default' ] = '50%';
-	}
-	if ( dialogName == 'flash' ) {
-		var info = dialogDefinition.getContents( 'info' );
-		console.log(info);
-		info.get( 'width' )[ 'default' ] = '100%';
-		info.get( 'height' )[ 'default' ] = '50%';
-		info.get( 'hSpace' )[ 'default' ] = '0';
-		info.get( 'vSpace' )[ 'default' ] = '0';
-	}
-	if ( dialogName == 'image2' ) {
-		var info = dialogDefinition.getContents( 'info' );
-		console.log(info);  
-		info.get( 'width' )[ 'default' ] = '100%';
-		info.get( 'height' )[ 'default' ] = 'auto';
-	}
-});
-}
-</script>
 </html>
