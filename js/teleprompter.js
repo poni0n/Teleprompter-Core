@@ -58,7 +58,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         "anchor":13,
         "close":14,
         "restoreEditor":15,
-        "resetTimer":16
+        "resetTimer":16,
+        "halt":17
     });
 
     // Global constants
@@ -440,6 +441,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
 
     function syncPrompters() {
         editor.postMessage( {'request':command.sync,'data':getProgress()}, getDomain() );
+    }
+
+    function halt() {
+        editor.postMessage( {'request':command.halt,'data':getProgress()}, getDomain() );
     }
 
     function instaSync() {
@@ -971,6 +976,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
                     play=false;
                     syncPrompters();
                     break;
+                case command.halt :
+                    stopInstance();
+                    break;
                 case command.internalPause :
                     requestAnimationFrame(localPauseAnimation);
                     break;
@@ -1070,6 +1078,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
             case 190: // Dot
                 syncPrompters();
                 break;
+            case ",":
+            case 188: // Comma
+                halt();
             case "Escape":
             case 27: // ESC
                 closeInstance();

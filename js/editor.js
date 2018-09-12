@@ -65,7 +65,8 @@ var debug = false;
         "anchor": 13,
         "close": 14,
         "restoreEditor": 15,
-        "resetTimer":16
+        "resetTimer":16,
+        "halt":17
     });
 
     function init() {
@@ -868,6 +869,14 @@ var debug = false;
                 listener({
                     data: {
                         request: command.sync
+                    }
+                });
+                break;
+                case ",":
+                case 188: // Comma
+                listener({
+                    data: {
+                        request: command.halt
                     }
                 });
                 break;
