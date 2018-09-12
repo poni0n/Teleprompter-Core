@@ -66,7 +66,9 @@ var debug = false;
         "close": 14,
         "restoreEditor": 15,
         "resetTimer":16,
-        "halt":17
+        "halt":17,
+        "previousPage":18,
+        "nextPage":19
     });
 
     function init() {
@@ -877,6 +879,22 @@ var debug = false;
                 listener({
                     data: {
                         request: command.halt
+                    }
+                });
+                break;
+                case "-":
+                case 189: // Minus
+                listener({
+                    data: {
+                        request: command.previousPage
+                    }
+                });
+                break;
+                case "=":
+                case 187: // =
+                listener({
+                    data: {
+                        request: command.nextPage
                     }
                 });
                 break;

@@ -59,7 +59,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         "close":14,
         "restoreEditor":15,
         "resetTimer":16,
-        "halt":17
+        "halt":17,
+        "previousPage":18,
+        "nextPage":19
     });
 
     // Global constants
@@ -783,7 +785,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         correctVerticalDisplacement();
     }, false);
 
-    window.addEventListener("wheel", function(event) {
+    window.addEventListener("wheel", async function(event) {
         if (debug) console.log(event);
         if (invertedWheel) {
             if (event.deltaY>0)
@@ -797,8 +799,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
             else
                 increaseVelocity();
         }
-        event.preventDefault();
-    }, false);
+        // event.preventDefault();
+    }, {passive: true});
 
     // CONTROL RELATED FUNCTIONS
 
@@ -809,6 +811,15 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
     }
     function decreaseFontSize() {
         editor.postMessage( {'request':12, 'data':getProgress()}, getDomain() );
+    }
+
+
+    // FAST SCROLL CONTROL
+    function previousPage() {
+        editor.postMessage( {'request':command.previousPage,'data':getProgress()}, getDomain() );
+    }
+    function nextPage() {
+        editor.postMessage( {'request':command.nextPage,'data':getProgress()}, getDomain() );
     }
 
     function internalIncreaseFontSize() {
@@ -823,6 +834,32 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         if (fontSize>0.5)
         fontSize-=0.05;
         updateFont();
+    }
+
+    function internalPreviousPage() {
+        if (debug) console.log("Previous page.");
+        // if (!atEnd()) {
+            localPauseAnimation();
+            var currPos = getCurrPos(),
+                destination = getDestination(currPos-screenHeight);
+            animate( 200, destination );
+            // localPlayAnimation();
+        // }
+        // else
+            // stopAll();
+    }
+
+    function internalNextPage() {
+        if (debug) console.log("Next page.");
+        // if (!atEnd()) {
+            // localPauseAnimation();
+            var currPos = getCurrPos(),
+                destination = getDestination(currPos+screenHeight);
+            animate( 200, destination );
+            // localPlayAnimation();
+        // }
+        // else
+            // stopAll();
     }
 
     function updateFont() {
@@ -999,6 +1036,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
                 case command.decFont :
                     internalDecreaseFontSize();
                     break;
+                case command.previousPage :
+                    internalNextPage();
+                    break;
+                case command.nextPage :
+                    internalPreviousPage();
+                    break;
                 case command.update :
                     updateContents();
                     break;
@@ -1068,6 +1111,14 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
             case 219: // [
             // case "BracketLeft":
                 decreaseFontSize();
+                break;
+            case "-":
+            case 189: // Minus
+                previousPage();
+                break;
+            case "=":
+            case 187: // =
+                nextPage();
                 break;
             case " ":           
             case 32: // Spacebar
