@@ -144,14 +144,14 @@
 							<label for="fontSize">Font scale:</label>
 							<label for="fontSize" id="fontSizeValue">120</label><label for="fontSize">%</label>
 						</small>
-						<input type="range" id="fontSize" name="fontSize" data-slider-value="120" data-slider-min="50" data-slider-max="400" data-slider-step="5" data-slider-ticks="[50,105,120,400]" data-slider-ticks-snap-bounds="0">
+						<input type="range" id="fontSize" name="fontSize" data-slider-value="105" data-slider-min="50" data-slider-max="400" data-slider-step="5" data-slider-ticks="[50,120,400]" data-slider-ticks-snap-bounds="0">
 					</div>
 					<div class='col-md-3 col-sm-6'>
 						<small>
 							<label for="borders">Editor borders:</label>
 							<label for="borders" id="bordersValue">84</label><label for="borders">%</label>
 						</small>
-						<input type="range" id="borders" name="borders" data-slider-value="84" data-slider-min="20" data-slider-max="100" data-slider-step="1" data-slider-ticks="[20,50,84,100]" data-slider-ticks-snap-bounds="0">
+						<input type="range" id="borders" name="borders" data-slider-value="84" data-slider-min="20" data-slider-max="100" data-slider-step="1" data-slider-ticks="[20,50,84,92,100]" data-slider-ticks-snap-bounds="0">
 					</div>
 					<!--
 					<div class='col-md-2 col-sm-2'>
@@ -504,9 +504,9 @@ if (typeof CKEDITOR!=="undefined") {
 				  { name: 'insert' },
 				  { name: 'others' },
 				  { name: 'colors' },
-				  { name: 'about' },
-				  '/',
 				  { name: 'links' },
+				  '/',
+				  { name: 'about' },
 				  { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 				  { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
 				  { name: 'styles' }
