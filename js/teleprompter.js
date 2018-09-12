@@ -39,7 +39,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
     // Global objects
     var settings, session, prompt, pointer, overlay, overlayFocus, styleSheet, editor, timer, clock, remote;
     // Global variables
-    var unit, x, velocity, sensitivity, speedMultip, relativeLimit, steps, play, timeoutStatus, invertedWheel, focus, promptStyleOption, customStyle, flipV, flipH, fontSize, focusHeight, promptHeight, previousPromptHeight, screenHeight, previousScreenHeight, previousScreenWidth, previousVerticalDisplacementCorrector, domain, debug, closing, cap, syncDelay, isMobileApp;
+    var unit, x, velocity, sensitivity, speedMultip, relativeLimit, steps, play, timeoutStatus, invertedWheel, focus, promptStyleOption, customStyle, flipV, flipH, fontSize, borders, focusHeight, promptHeight, previousPromptHeight, screenHeight, previousScreenHeight, previousScreenWidth, previousVerticalDisplacementCorrector, domain, debug, closing, cap, syncDelay, isMobileApp;
 
     // Enums
     var command = Object.freeze({
@@ -140,7 +140,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         // Get focus mode
         focus = settings.data.focusMode;
 
-        timer = $('.clock').timer({ stopVal: 10000 });
+        // timer = $('.clock').timer({ stopVal: 10000 });
         // Get and set prompter text
         updateContents();
         setPromptHeight();
@@ -254,33 +254,49 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         if (debug) console.log("Updating prompter");
         updateDatamanager();
         var oldFontSize = fontSize;
+        var oldBorders = borders;
         fontSize = settings.data.fontSize/100;
+        borders = settings.data.borders;
         speedMultip = settings.data.speed;
         sensitivity = settings.data.acceleration;
         // If updating font, update it and resync
         if (oldFontSize !== fontSize)
             updateFont();
+        if (oldBorders !== borders)
+            updateBorders();
         // If screen is vertically flipped, resync
         else if (flipV) {
             onResize();
             window.setTimeout(onResize, transitionDelays*1.1);
         }
+        // Get new prompter contents
         prompt.innerHTML = decodeURIComponent(session.html);
+        // Make list of class elements
+        var anchors = document.getElementsByClassName('anchor');
+        if (anchors.length>0) {
+            console.log('Anchors found:');
+            for (let i=0; i<anchors.length; i++) {
+                console.log(i);
+                // console.log(anchors[i].id);
+                // console.log(anchors[i].text);
+            }
+        }
+
         updateVelocity();
         
         // Enable timer
-        if (settings.data.timer===true) {
-            if (timer.data().timer.currentVal===0)
-            timer.startTimer();
-            clock.style.opacity = '1';
-        }
-        else {
-            clock.style.opacity = '0';
-            setTimeout(function() {
-                timer.resetTimer();
-                timer.stopTimer();
-            }, 800);
-        }
+        // if (settings.data.timer===true) {
+        //     if (timer.data().timer.currentVal===0)
+        //     timer.startTimer();
+        //     clock.style.opacity = '1';
+        // }
+        // else {
+        //     clock.style.opacity = '0';
+        //     setTimeout(function() {
+        //         timer.resetTimer();
+        //         timer.stopTimer();
+        //     }, 800);
+        // }
     }
 
     function pointerActive(event) {
@@ -465,7 +481,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         x=0;
         updateVelocity();
         resumeAnimation();
-        timer.stopTimer();
+        if (timer!==undefined)
+            timer.stopTimer();
     }
 
     document.addEventListener( 'transitionend', function() {
@@ -570,7 +587,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         // Resumes animation with new destination and time values.
         if (play) {
             // Restart timer.
-            timer.startTimer();
+            // timer.startTimer();
             // Get new style variables.
             var currPos = getCurrPos(),
                 destination = getDestination(currPos),
@@ -809,6 +826,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
         onResize();
     }
 
+    function updateBorders() {
+        prompt.style.width = borders+"%";
+        prompt.style.left = (100-borders)/2+"%";
+        onResize();
+    }
+
     function decreaseVelocity() {
         editor.postMessage( {'request':2,'data':getProgress()}, getDomain() );
     }
@@ -881,7 +904,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
 
     function localPauseAnimation() {
         animate(0, getCurrPos());
-        timer.stopTimer();
+        if (timer!==undefined)
+            timer.stopTimer();
     }
 
     function localPlayAnimation() {
@@ -893,7 +917,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
     }
 
     function internalResetTimer() {
-        timer.resetTimer();
+        if (timer!==undefined)
+            timer.resetTimer();
         playAnimation();
         if (debug) console.log("Timer reset.");
     }
@@ -1026,18 +1051,14 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
             case 87: // W
                 decreaseVelocity();
                 break;
-            case "d":
-            case "D":
-            case "ArrowRight":
-            case 83: // S
-            case 39: // Right
+            case "]":
+            case 221: // ]
+            // case "BracketRight":
                 increaseFontSize();
                 break;
-            case "a":
-            case "A":
-            case "ArrowLeft":
-            case 37: // Left
-            case 65: // A
+            case "[":
+            case 219: // [
+            // case "BracketLeft":
                 decreaseFontSize();
                 break;
             case " ":           
@@ -1128,3 +1149,16 @@ function inIframe() {
 function inElectron() {
     return navigator.userAgent.indexOf("Electron")!=-1;
 }
+
+// Dev:  Lost and found during hackathon mode. Please identify where this goes froma previous commit. -Javier
+        // if (settings.data.timer===true) {
+        //     if (timer.data().timer.currentVal===0)
+        //     timer.startTimer();
+        //     clock.style.opacity = '1';
+        // }
+        // else {
+        //     clock.style.opacity = '0';
+        //     setTimeout(function() {
+        //         timer.resetTimer();
+        //         timer.stopTimer();
+        //     }, 800);

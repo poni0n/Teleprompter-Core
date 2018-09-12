@@ -17,6 +17,7 @@
 */
 
 body {
+	overflow-y: hidden;
 	background: #333;
 	margin: 0px;
 	padding: 0px;
@@ -82,8 +83,9 @@ footer #imaginary {
 	top: 0px;
 	bottom: 0px;
 	width: 100%;
-	min-height: 78vh;
-	height: calc(100% - 69px);	
+	/*min-height: 78vh;*/
+	min-height: 50px;
+	height: calc(100vh - 119px);	
 	/* Cancel 3D transform from intergalactic theme. */
 	transform: rotateX(0deg) translate3d(0px,0px,0px) !important;
 }
@@ -92,6 +94,7 @@ footer #imaginary {
 	position: relative;
 	top: 0px;
 	width: 100%;
+	min-height: 70px;
 	background: #F0F0F0;
 }
 
@@ -117,7 +120,11 @@ footer #imaginary {
 .mce-menu {
 	background: #000;
 }
-
+.cke_path_item {
+	font-size: 13pt !important;
+	font-weight: 300 !important;
+	font-family: Tahoma, Geneva, sans-serif !important;
+}
 #framecontainer {
 	position: fixed;
 	margin: 0px;

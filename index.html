@@ -49,6 +49,13 @@
 				</ul>-->
 		</div>
 	</div>
+	<div id="wrapper" class="toggled hidden-xs">
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav" id="anchorList">
+			</ul>
+		</div>
+	</div>
 	<form>
 		<!-- Header -->
 		<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
@@ -58,7 +65,7 @@
 						<li><a id="menu-toggle" href="#menu-toggle"><img style="width:26px;" src="fonts/noto-emoji-master/emoji_u1f4be.svg"></a></li>
 					</ul>
 					<div class="navbar-header">
-						<a class="external navbar-brand" href="http://imaginary.tech/teleprompter/" target="_blank"><img src="img/logo.png" alt="Teleprompter" ></a>
+						<a class="external navbar-brand" href="https://imaginary.tech/teleprompter/" target="_blank"><img src="img/logo.png" alt="Teleprompter" ></a>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a id="advConfig" href="#content" data-toggle="collapse"><img style="width:26px;" src="fonts/noto-emoji-master/emoji_u2699.svg"></a></li>
@@ -118,29 +125,35 @@
 			</div>
 			<div class="container">
 				<div class='row'>
-					<div class='col-md-10 col-sm-10'>
-						<div class='col-md-4 col-sm-4'>
-							<small>
-								<label for="speed">Speed:</label>
-								<label for="speed" id="speedValue">4.0</label>
-							</small>
-							<input type="range" id="speed" name="speed" data-slider-value="4.0" data-slider-step="0.5" data-slider-min="1" data-slider-max="20" data-slider-ticks="[1,4,20]" data-slider-ticks-snap-bounds="0">
-						</div>
-						<div class='col-md-4 col-sm-4'>
-							<small>
-								<label for="acceleration">Acceleration curve:</label>
-								<label for="acceleration" id="accelerationValue">1.45</label>
-							</small>
-							<input type="range" id="acceleration" name="acceleration" data-slider-value="1.45" data-slider-min="0.5" data-slider-max="1.8" data-slider-step="0.05" data-slider-ticks="[0.5,1.45,1.8]" data-slider-ticks-snap-bounds="0">
-						</div>
-						<div class='col-md-4 col-sm-4'>
-							<small>
-								<label for="fontSize">Font scale:</label>
-								<label for="fontSize" id="fontSizeValue">120</label><label for="fontSize">%</label>
-							</small>
-							<input type="range" id="fontSize" name="fontSize" data-slider-value="120" data-slider-min="50" data-slider-max="250" data-slider-step="5" data-slider-ticks="[50,120,250]" data-slider-ticks-snap-bounds="0">
-						</div>
+					<div class='col-md-3 col-sm-6'>
+						<small>
+							<label for="speed">Speed:</label>
+							<label for="speed" id="speedValue">4.0</label>
+						</small>
+						<input type="range" id="speed" name="speed" data-slider-value="4.0" data-slider-step="0.5" data-slider-min="1" data-slider-max="20" data-slider-ticks="[1,4,20]" data-slider-ticks-snap-bounds="0">
 					</div>
+					<div class='col-md-3 col-sm-6'>
+						<small>
+							<label for="acceleration">Acceleration curve:</label>
+							<label for="acceleration" id="accelerationValue">1.45</label>
+						</small>
+						<input type="range" id="acceleration" name="acceleration" data-slider-value="1.45" data-slider-min="0.5" data-slider-max="1.8" data-slider-step="0.05" data-slider-ticks="[0.5,1.45,1.8]" data-slider-ticks-snap-bounds="0">
+					</div>
+					<div class='col-md-3 col-sm-6'>
+						<small>
+							<label for="fontSize">Font scale:</label>
+							<label for="fontSize" id="fontSizeValue">120</label><label for="fontSize">%</label>
+						</small>
+						<input type="range" id="fontSize" name="fontSize" data-slider-value="120" data-slider-min="50" data-slider-max="400" data-slider-step="5" data-slider-ticks="[50,105,120,400]" data-slider-ticks-snap-bounds="0">
+					</div>
+					<div class='col-md-3 col-sm-6'>
+						<small>
+							<label for="borders">Editor borders:</label>
+							<label for="borders" id="bordersValue">84</label><label for="borders">%</label>
+						</small>
+						<input type="range" id="borders" name="borders" data-slider-value="84" data-slider-min="20" data-slider-max="100" data-slider-step="1" data-slider-ticks="[20,50,84,100]" data-slider-ticks-snap-bounds="0">
+					</div>
+					<!--
 					<div class='col-md-2 col-sm-2'>
 						<small>
 							<label for="timer">Timer</label>
@@ -150,7 +163,8 @@
 						    <button class="btn btn-primary active">Off</button>
 						</div>
 					</div>
-					<!--
+ 					-->
+ 					<!--
  					<div class='col-md-1 col-sm-1'>
 						<small>
 							<label for="timer">Timer</label>
@@ -175,7 +189,7 @@
 		<div id="editorcontainer">
 			<div id="toolbar"></div>
 			<div id="promptcontainer">
-				<div id="prompt" contenteditable="true">
+				<article id="prompt" contenteditable="true">
 					<h3>Welcome to Teleprompter!</h3>
 					<p>Are you ready to tell a story?</p>
 					<br>
@@ -238,15 +252,15 @@
 					<li>When prompting, press on the shortcut key to jump into the desired location.</li>
 					</ol>
 					<p>###</p>
-				</div>
+				</article>
 			</div>
 			<div id="statusbar"></div>
 		</div>
 	</form>
 	<!-- Footer -->
-	<footer id="footer" class="bs-docs-footer" role="contentinfo">
+	<footer id="footer" class="bs-docs-footer hidden" role="contentinfo">
 		<div class="container">
-			<p style="color:#FFF;">&copy; <a id="imaginary" class="external" href="http://imaginary.tech/teleprompter/" target="_blank">Imaginary Films LLC &amp; Contributors</a></p>
+			<p style="color:#FFF;">&copy; <a id="imaginary" class="external" href="https://imaginary.tech/teleprompter/" target="_blank">Imaginary Films LLC &amp; Contributors</a></p>
 			<p>Developed by: <a class="external" href="https://www.linkedin.com/in/javier-oscar-cordero-p%25C3%25A9rez-70658033" target="_blank">Javier Cordero</a>,
 				<a class="external" href="https://twitter.com/Va2ron1" target="_blank">Victor Ortiz</a>,<br><a class="external" href="https://www.facebook.com/rafael.jose.7737">Rafael Sierra</a> &amp; <a class="external" href="https://github.com/keyvanp">Keyvan Pérez</a>.
 			</p>
@@ -260,10 +274,10 @@
 				<li>&middot;</li>
 				<li><a class="external" target="_blank" href="https://github.com/ImaginarySense/Teleprompter-Core">Source Code</a></li>
 				<li>&middot;</li>
-				<li><a class="external" target="_blank" href="http://imaginary.tech/teleprompter/#download">Downloads</a></li>
+				<li><a class="external" target="_blank" href="https://imaginary.tech/teleprompter/#download">Downloads</a></li>
 				<li>&middot;</li>
 			</ul>
-			<!--<li><a class="external" target="_blank" href="http://imaginary.tech/teleprompter/">About</a></li>-->
+			<li><a class="external" target="_blank" href="https://imaginary.tech/teleprompter/">About</a></li>
 		</div>
 	</footer>
 	<div id="framecontainer">
@@ -501,7 +515,7 @@ if (typeof CKEDITOR!=="undefined") {
 				  // Remove the redundant buttons from toolbar groups defined above.
 				  removeButtons: 'Save,Smiley,ShowBlocks,Unlink,Link,Blockquote,CreateDiv,PageBreak,Language,Styles',/*,Styles,Specialchar*/
 				  // Font sizes
-				  fontSize_sizes: '0.7 em/0.7em;0.8 em/0.8em;0.9 em/0,9em;1.0 em/1em;1.1 em/1.1em;1.2 em/1.2em;1.3 em/1.3em;1.4 em/1.4em;1.5 em/1.5em;1.6 em/1.6em;1.7 em/1.7em;1.8 em/1.8em;1.9 em/1.9em;2.0 em/2em;2.1 em/2.1em;2.2 em/2.2em;2.3 em/2.3em;2.4 em/2.4em;2.5 em/2.5em;2.6 em/2.6em;2.7 em/2.7em;2.8 em/2.8em;2.9 em/2.9em;3.0 em/3em',
+				  fontSize_sizes: '0.2 em/0.2em;0.3 em/0.3em;0.4 em/0.4em;0.5 em/0.5em;0.6 em/0.6em;0.7 em/0.7em;0.8 em/0.8em;0.9 em/0,9em;1.0 em/1em;1.1 em/1.1em;1.2 em/1.2em;1.3 em/1.3em;1.4 em/1.4em;1.5 em/1.5em;1.6 em/1.6em;1.7 em/1.7em;1.8 em/1.8em;1.9 em/1.9em;2.0 em/2em;2.1 em/2.1em;2.2 em/2.2em;2.3 em/2.3em;2.4 em/2.4em;2.5 em/2.5em;2.6 em/2.6em;2.7 em/2.7em;2.8 em/2.8em;2.9 em/2.9em;3.0 em/3em',
 				  // Font sizes
 				  line_height: '1 em/1em;1.1 em/1.1em;1.2 em/1.2em;1.3 em/1.3em;1.4 em/1.4em;1.5 em/1.5em;1.6 em/1.6em;1.7 em/1.7em;1.8 em/1.8em;1.9 em/1.9em;2.0 em/2.0em',
 				  // Quick tables

@@ -90,7 +90,8 @@ var debug = false;
         slider = [
             new Slider("#speed", {}),
             new Slider("#acceleration", {}),
-            new Slider("#fontSize", {})
+            new Slider("#fontSize", {}),
+            new Slider("#borders", {})
         ];
         // Data binding for advanced options
         slider[0].on("change", function(input) {
@@ -103,8 +104,12 @@ var debug = false;
             document.getElementById("fontSizeValue").textContent = input.newValue;
             updateFont(input.newValue);
         });
+        slider[3].on("change", function(input) {
+            document.getElementById("bordersValue").textContent = input.newValue;
+            updateBorders(input.newValue);
+        });
         // Set credits button
-        document.getElementById("credits-link").onclick = credits;
+        //// document.getElementById("credits-link").onclick = credits;
         // Set domain to current domain.
         setDomain();
 
@@ -512,7 +517,7 @@ var debug = false;
         else if (typeof tinymce !== "undefined")
             htmldata = tinymce.get("prompt").getContent();
         // Define possible values
-        var primary, secondary, style, focusArea, speed, acceleration, fontSize, timer, voice;
+        var primary, secondary, style, focusArea, speed, acceleration, fontSize, borders, timer, voice;
         // Get form values
         if (override!==undefined && typeof override==='string' || override instanceof String)
             override = JSON.parse(override);
@@ -545,20 +550,25 @@ var debug = false;
             fontSize = override.fontSize;
         else
             fontSize = slider[2].getValue();
-        if (override!==undefined && override.timer!==undefined)
-            timer = override.timer;
-        else {
-            if ( document.getElementById("timer").children[0].classList.contains("btn-primary") )
-                timer = true;
-            else
-                timer = false;
-        }
+        if (override!==undefined && override.borders!==undefined)
+            borders = override.borders;
+        else
+            borders = slider[3].getValue();
+        // if (override!==undefined && override.timer!==undefined)
+        //     timer = override.timer;
+        // else {
+        //     if ( document.getElementById("timer").children[0].classList.contains("btn-primary") )
+        //         timer = true;
+        //     else
+        //         timer = false;
+        // }
+        timer = false;
         if (override!==undefined && override.voice!==undefined)
             voice = override.voice;
         else
             voice = false;
         // Merge all settings into one.
-        var settings = '{ "data": {"primary":'+primary+',"secondary":'+secondary+',"prompterStyle":'+style+',"focusMode":'+focusArea+',"speed":'+speed+',"acceleration":'+acceleration+',"fontSize":'+fontSize+',"timer":'+timer+',"voice":'+voice+'}}',
+        var settings = '{ "data": {"primary":'+primary+',"secondary":'+secondary+',"prompterStyle":'+style+',"focusMode":'+focusArea+',"speed":'+speed+',"acceleration":'+acceleration+',"fontSize":'+fontSize+',"borders":'+borders+',"timer":'+timer+',"voice":'+voice+'}}',
         session = '{ "html":"' + encodeURIComponent(htmldata) + '" }';
 
         // Store data locally for prompter to use
@@ -876,6 +886,9 @@ var debug = false;
                 });                    
                 break;
                 // EDITOR COMMANDS
+                case 113:
+                case "F2":
+                    CKEDITOR.tools.callFunction(30,this);
                 case 116:
                 case "F5":
                 if (debug)
@@ -968,12 +981,18 @@ var debug = false;
         document.getElementById("prompt").style.fontSize = "calc(5vw * "+(value/100+0.05)+")";
     }
 
+    function updateBorders(value) {
+        if (debug) console.log("Updating border.");
+        document.getElementById("prompt").style.width = value+"%";
+        document.getElementById("prompt").style.left = (100-value)/2+"%";
+    }
+
     function loadLastUseSettings() {
         // Get last used settings.
         var settings = function ( lastSettings ) {
             if (lastSettings!==undefined && lastSettings!==null) {
                 if (debug) console.log(lastSettings);
-                lastSettings = JSON.parse(lastSettings);
+                // lastSettings = JSON.parse(lastSettings);
                 document.getElementById("primary").value = lastSettings.data.primary;
                 document.getElementById("secondary").value = lastSettings.data.secondary;
                 // document.getElementById("prompterStyle").value = lastSettings.data.prompterStyle;
@@ -991,18 +1010,24 @@ var debug = false;
                     slider[2].setValue(lastSettings.data.fontSize);
                 else
                     lastSettings.data.fontSize = slider[2].getValue();
+                if (!isNaN(lastSettings.data.borders))
+                    slider[3].setValue(lastSettings.data.borders);
+                else
+                    lastSettings.data.borders = slider[3].getValue();
                 document.getElementById("speedValue").textContent = parseFloat(Math.round(lastSettings.data.speed * 10) / 10).toFixed(1);
                 document.getElementById("accelerationValue").textContent = parseFloat(Math.round(lastSettings.data.acceleration * 100) / 100).toFixed(2);
                 document.getElementById("fontSizeValue").textContent = lastSettings.data.fontSize;
+                document.getElementById("bordersSize").textContent = lastSettings.data.borders;
                 updateFont(lastSettings.data.fontSize);
+                updateBorders(lastSettings.data.bordersSize);
                 // Set timer value
-                var timer = document.getElementById("timer")
-                if (lastSettings.data.timer) {
-                    timer.children[0].classList.add("btn-primary");
-                    timer.children[0].classList.remove("btn-default");
-                    timer.children[1].classList.add('btn-default');
-                    timer.children[1].classList.remove('btn-primary');
-                }
+                // var timer = document.getElementById("timer")
+                // if (lastSettings.data.timer) {
+                //     timer.children[0].classList.add("btn-primary");
+                //     timer.children[0].classList.remove("btn-default");
+                //     timer.children[1].classList.add('btn-default');
+                //     timer.children[1].classList.remove('btn-primary');
+                // }
                 // Set voice value
                 // var voice = document.getElementById("voice")
                 // if (lastSettings.data.timer) {
@@ -1308,8 +1333,10 @@ var debug = false;
                     toggleFullscreen();
                 } else if (event.key===119 || event.key==="F8") {
                     togglePrompter();
+                } else if (event.key===113 || event.key==="F2") {
+                    CKEDITOR.tools.callFunction(30,this);//return false;
+                    // return true;
                 }
-                return true;
             });
 
             editor.on('focus', function() {

@@ -1,0 +1,39 @@
+pre {
+	white-space: initial;
+}
+.cover .navbar {
+	z-index: 1;
+}
+.navbar-inverse .navbar-nav > li > a {
+	color: #FFF;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+	text-decoration: underline;
+}
+.navbar-inverse .navbar-brand {
+	color: #CCC;
+}
+#imaginary-logo {
+	max-width: 200px;
+}
+.img-responsive {
+}
+.img-shadow {
+	box-shadow: 9px 9px 8px #898989;
+	z-index: 10000;
+}
+.dark-transparent-bg {
+	background: rgba(24,16,0,0.5);
+}
+p {
+	font-size: 1.2em;
+} 
+footer a {
+	color: #FFF;
+}
+footer a:hover {
+	color: #FFF;
+}
+.alert-warning {
+	color: #333;
+}
