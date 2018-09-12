@@ -839,26 +839,28 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
     function internalPreviousPage() {
         if (debug) console.log("Previous page.");
         // if (!atEnd()) {
-            localPauseAnimation();
             var currPos = getCurrPos(),
                 destination = getDestination(currPos-screenHeight);
-            animate( 200, destination );
-            // localPlayAnimation();
-        // }
-        // else
+            if (destination>-promptHeight+screenHeight) {
+                console.log(destination);
+                animate( 200, destination );
+            }                
+            // resumeAnimation();
+        // } else
             // stopAll();
     }
 
     function internalNextPage() {
         if (debug) console.log("Next page.");
         // if (!atEnd()) {
-            // localPauseAnimation();
             var currPos = getCurrPos(),
                 destination = getDestination(currPos+screenHeight);
-            animate( 200, destination );
-            // localPlayAnimation();
-        // }
-        // else
+            if (destination<0) {
+                console.log(destination);
+                animate( 200, destination );
+            }
+            // resumeAnimation();
+        // } else
             // stopAll();
     }
 
