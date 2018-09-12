@@ -836,22 +836,16 @@ var debug = false;
                     }
                 });
                 break;
-                case "d":
-                case "D":
-                case "ArrowRight":
-                case 83: // S
-                case 39: // Right
+                case "]":
+                case 221: // ]
                 listener({
                     data: {
                         request: command.incFont
                     }
                 });
                 break;
-                case "a":
-                case "A":
-                case "ArrowLeft":
-                case 37: // Left
-                case 65: // A
+                case "[":
+                case 219: // [
                 listener({
                     data: {
                         request: command.decFont
