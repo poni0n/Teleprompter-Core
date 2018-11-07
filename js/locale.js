@@ -231,6 +231,16 @@ i18next.init({
           "add": "",
           "import": "",
           "new": ""
+        },
+        "credits": {
+          "developedBy": "",
+          "contributors": "",
+          "currently": "",
+          "licensedUnder": "",
+          "assetsUnder": "",
+          "fullCredits": "",
+          "sourceCode": "",
+          "downloads": ""
         }
       }
     }
