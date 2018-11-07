@@ -58,28 +58,28 @@ function styleInit(prompterStyleElement) {
     if (!themeStyles) {
         themeStyles = [{
         id:0,
-            name: "Azure Light",
+            name: i18next.t('customStyles.styles.azure-light', { defaults: "Azure Light"}),
             type: 0,
             className: "azureLight",
             bgOverlay: "azureLightO",
             cssText: ".azureLight {color: #229FFF; background: #000000;}.azureLightO {background: #202020;}"
         }, {
         id:1,
-            name: "Blackboard",
+            name: i18next.t('customStyles.styles.blackboard', { defaults: "Blackboard"}),
             type: 0,
             className: "darkBody",
             bgOverlay: "darkOverlay",
             cssText: ".darkBody {background: #272822;color:#FFF;}.darkOverlay {background: #000;}"
         }, {
         id:2,
-            name: "Classic Yellow",
+            name: i18next.t('customStyles.styles.classic-yellow', { defaults: "Classic Yellow"}),
             type: 0,
             className: "yellowBody",
             bgOverlay: "darkOverlay",
             cssText: ".yellowBody {color: #FF0;background: #000;}.darkOverlay {background: #000;}"
         }, {
         id:3,
-            name: "Dark Matter",
+            name: i18next.t('customStyles.styles.dark-matter', { defaults: "Dark Matter"}),
             type: 0,
             className: "darkMatter",
             bgOverlay: "darkMatterO",
@@ -93,7 +93,7 @@ function styleInit(prompterStyleElement) {
         //     cssText: ".theForce {color: #FD1;background: #000;transform-origin: 50% 50%; transform: perspective(100px) rotateX(90deg) translate3d(0px,0px,-100vh);}.darkOverlay {background: #000;}"
         // }, {
         id:4,
-            name: "Whiteboard",
+            name: i18next.t('customStyles.styles.whiteboard', { defaults: "Whiteboard"}),
             type: 0,
             className: "lightBody",
             bgOverlay: "lightOverlay",
@@ -213,7 +213,7 @@ function refreshPromptStyles(promptStyleElement) {
 
     var opt = document.createElement('option');
     opt.value = themeStyles.length;
-    opt.innerHTML = "Custom Style";
+    opt.innerHTML = i18next.t('customStyles.name', { defaults: "Custom Style"});
 
     promptStyleElement.appendChild(opt);
     setStyle(defaultStyle);
@@ -454,7 +454,7 @@ function openPromptStyles() {
     document.getElementsByClassName("close")[0].addEventListener("click", closePromptStyles);
 
     document.getElementById("nameStyle").addEventListener("input", function() {
-        onNameStyleChange(this)
+        onNameStyleChange(this);
     });
 
 	lastStyleSelected = getIndexOfStyleByID(defaultStyle);

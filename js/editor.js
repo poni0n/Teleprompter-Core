@@ -424,7 +424,7 @@ var debug = false;
     function togglePromptIt() {
         if (promptIt.onclick === submitTeleprompter) {
             // Update button
-            promptIt.textContent = "Close It...";
+            promptIt.textContent = i18next.t('navbar.closeIt', { defaults: "Close It..."});
             promptIt.onclick = restoreEditor;
             // Hide stuff
             if (instance[0]) {
@@ -447,7 +447,7 @@ var debug = false;
             }
         } else {
             // Update button
-            promptIt.innerHTML = "Prompt It!";
+            promptIt.innerHTML = i18next.t('navbar.promptIt', { defaults: "Prompt It!"});
             promptIt.onclick = submitTeleprompter;
             // Restore editor
             if (instance[0]) {
@@ -678,13 +678,13 @@ var debug = false;
 
         // In case of both instances active and not enough screens...
         if (!forceSecondaryDisplay && (inElectron() && !secondaryDisplay && instance[0] && instance[1])) {
-            window.alert("You don't have any external Display.");
+            window.alert(i18next.t('editor.secondaryDisplay', { defaults: 'You don\'t have any external Display.' }));
             instance[0] = false;
             instance[1] = false;
         }
         // In case that no instance is active...
         else if (!(instance[0] || instance[1]))
-            window.alert("You must prompt at least to one display.");
+            window.alert(i18next.t('editor.noInstance', { defaults: 'You must prompt at least to one display.' }));
         else
             togglePromptIt();
     }
@@ -725,7 +725,7 @@ var debug = false;
     }
 
     function clearAllRequest() {
-        if (confirm("You've pressed F6. Do you wish to perform a factory reset of Teleprompter? You will loose all saved scripts and custom styles.") ) {
+        if (confirm(i18next.t('editor.clearAllRequest', { defaults: "You've pressed F6. Do you wish to perform a factory reset of Teleprompter? You will loose all saved scripts and custom styles." })) ) {
             dataManager.clearAll();
             window.removeEventListener("beforeunload", updatePrompterData);
             refresh();
@@ -996,7 +996,7 @@ var debug = false;
                 document.getElementById("fontSizeValue").textContent = lastSettings.data.fontSize;
                 updateFont(lastSettings.data.fontSize);
                 // Set timer value
-                var timer = document.getElementById("timer")
+                var timer = document.getElementById("timer");
                 if (lastSettings.data.timer) {
                     timer.children[0].classList.add("btn-primary");
                     timer.children[0].classList.remove("btn-default");
@@ -1256,11 +1256,11 @@ var debug = false;
         //initialize SideBar
         var sid = sidebar.on('scripts',{
             "name":"Files",
-            "elementName":"Script",
+            "elementName": i18next.t('script.name', { defaults: "Script" }),
             "newElementName":"Untitled",
             "dataKey":"IFTeleprompterSideBar",
             "preloadData":[{
-                "name": "Instructions",
+                "name": i18next.t('script.instructions', { defaults: "Instructions" }),
                 "data": '<h3>Welcome to Teleprompter!</h3>\n<p>Are you ready to tell a story?</p>\n<br>\n<p>"Teleprompter" is the most complete, free software, professional teleprompter for anyone to use. Click on "Prompt It!" whenever you\'re ready and control the speed with the arrow keys.</p>\n<br>\n<h3>Here are some of our features:</h3>\n<ol>\n<li>Control the speed and text-size with the \'Up\' and \'Down\' arrow keys, the \'W\' and \'S\' keys or the mouse wheel. You may press \'Spacebar\' to pause at anytime.</li>\n<li>Dynamically change the font-size by pressing \'Left\' and \'Right\' or the \'A\' and \'D\' keys.</li>\n<li>Flip modes allow <em>mirroring</em> the prompter in every possible way.</li>\n<li>You can use one or two instances. Mirror one, monitor on the other one.</li>\n<li><a id="5" name="5">Set almost any key as an <em>anchor</em> and instantly jump to any part of the script. Try pressing \'5\' now!</a></li>\n<li>Different focus areas allow you to easily use Teleprompter with a webcam, a tablet, or professional teleprompter equipment.</li>\n<li>Time your segments with the built in <em>timer</em>. Press \'Backspace\' to reset the timer.</li>\n<li>Tweak the <em>Speed</em>, <em>Acceleration Curve</em> and <em>Font Size</em> settings to fit your hosts\' needs.</li>\n<li>The Rich Text Editor, derived from the highly customizable CKeditor, gives unlimited possibilities on what you can prompt.</li>\n<ul>\n<!--\n <li>Add emoticons to indicate feelings and expressions to your hosts.\n</li>\n-->\n<li>\nYou may generate and display mathematical equations using the integrated CodeCogs equation editor.<br>\n<table border="1" cellpadding="1" cellspacing="1">\n<tbody>\n<tr>\n<td>&nbsp;</td>\n<td><img alt="\bg_white \huge \sum_{heta+\Pi }^{80} sin(heta)" src="http://latex.codecogs.com/gif.latex?%5Cdpi%7B300%7D%20%5Cbg_white%20%5Chuge%20%5Csum_%7B%5CTheta&amp;plus;%5CPi%20%7D%5E%7B80%7D%20sin%28%5CTheta%29" /></td>\n<td>&nbsp;</td>\n</tr>\n</tbody>\n</table>\n</li>\n<li>Insert images from the web or copy and paste them into the prompter.\n<img alt="Picture: Arecibo Sky" src="img/arecibo-sky.jpg">\n</li>\n </ul>\n<li>There are various <em>Prompter Styles</em> to choose from. You may also create your own.</li>\n<li>Press \'F11\' to enter and leave fullscreen.\nYou may fullscreen the text editor for greater concentration.</li>\n<!-- <li>Download our mobile app, <em>Teleprompter X</em>, to remote control Teleprompter instalations.</li>\n --><li>Run the "External prompter" on a second screen, add new contents into the editor, then "Update" your prompter in realtime without having to halt your script.</li>\n<li>Teleprompter works across screens with different resolutions and aspect ratios.</li>\n<li>Using calculus and relative measurement units, Teleprompter is built to age gracefully. Speed and contents remain consistent from your smallest screen up to 4k devices and beyond.</li>\n<li>Animations are hardware accelerated for a smooth scroll. A quad-core computer with dedicated graphics and, at least, 2GB RAM is recommended for optimal results.</li>\n<li>Teleprompter doesn\'t stretch a lower quality copy of your prompt for monitoring, instead it renders each instance individually at the highest quality possible. You should lower your resolution to increase performance on lower end machines.</li>\n<li>Text can be pasted from other word processors such as Libre Office Writer&trade; and Microsoft Word&reg;.</li>\n<li>All data is managed locally. We retain no user data.</li>\n<li>Use the standalone install for greater performance and automatic fullscreen prompting.</li>\n<li>The standalone version comes for Linux, OS X, Microsoft Windows and Free BSD.</li>\n<li>Close prompts and return to the editor by pressing \'ESC\'.</li>\n</ol>\n<hr>\n<h4>How to use anchor shortcuts:</h4>\n<ol>\n<li>Select a keyword or line you want to jump to on your text in the editor.</li>\n<li>Click on the <strong>Flag Icon</strong> on the editor\'s tool bar.</li>\n<li>A box named "Anchor Properties" should have appeared. Type any single key of your choice and click \'Ok\'.<br>Note preassigned keys, such as WASD and Spacebar will be ignored.</li>\n<li>Repeat as many times as you wish.</li>\n<li>When prompting, press on the shortcut key to jump into the desired location.</li>\n</ol>\n<p>###</p>',
                 "editable": false
             }],

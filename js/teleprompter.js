@@ -220,7 +220,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
             previousScreenHeight = screenHeight;
             previousScreenHeight = screenHeight;
             previousVerticalDisplacementCorrector = focusVerticalDisplacementCorrector();
-            
+
             // Sync prompter positions to smallest at start.
             syncPrompters();
 
@@ -296,7 +296,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/onversionchange
 
     function pointerInactive() {
         if (pointer.active) {
-            if ( !pointer.moved )
+            if (!pointer.moved)
                 toggleTouchControls();
             if (debug) console.log("Pointer inactive") && false;
             pointer.moved = false;

@@ -21,11 +21,11 @@ var SIDEBAR = function() {
     this.closeModal =  function() {
         window.location = "#close";
         document.getElementById("prompt").focus();
-    }
+    };
 
     this.maxFileSize = function() {
         return Math.floor(255/2-5); // Return 122. Could be increased depending on the Filesystem and the charset encoding.
-    }
+    };
 
     this.download = function( currentDocument, index ) {
         if (debug) {
@@ -54,11 +54,11 @@ var SIDEBAR = function() {
             inputName = document.getElementById("inputName"),
             inputID = document.getElementById("inputID");
         if (inputName.value.length===0) {
-            window.alert("Every script needs a title.");
+            window.alert(i18next.t('sidebar.needTitle', { defaults: "Every script needs a title."}));
             inputName.focus();
             return;
         } else if ( inputName.value.length>this.maxFileSize() ) {
-            window.alert("That filename is too long...");
+            window.alert(i18next.t('sidebar.nameTooLong', { defaults: "That filename is too long..."}));
             inputName.focus();
             return;
         }
@@ -115,7 +115,7 @@ var SIDEBAR = function() {
                         // Truncate file name.
                         if ( inputName.length>maxLength ) {
                             if (debug) console.log("Name will be truncated. Maximum allowed length: "+maxLength+" characters.");
-                            alert("The following file's name is too long and will be truncated: "+inputName);
+                            alert(i18next.t('sidebar.nameTooLongWillBeTruncated', { defaults: "The following file's name is too long and will be truncated: "})+inputName);
                             inputName = inputName.slice(0, maxLength);
                         }
                         elementsData.push({
@@ -146,7 +146,7 @@ var SIDEBAR = function() {
         // List unsuported files
         var length = unsuportedFiles.length-1;
         if (length!==-1) {
-            var unsuportedAlert = "The following files could not be imported: ";
+            var unsuportedAlert = i18next.t('sidebar.filesCouldNotBeImported', { defaults: "The following files could not be imported: "});
             for (var i=0; i<length; i++)
                 unsuportedAlert += unsuportedFiles[i] + ", ";
             unsuportedAlert += unsuportedFiles[length] + ".";
@@ -156,7 +156,7 @@ var SIDEBAR = function() {
         delete unsuportedFiles;
         if (!supportedFileFound)
             // Notify no files were imported.
-            alert("Import failed. No supported file found.");
+            alert(i18next.t('sidebar.importFailed', { defaults: "Import failed. No supported file found."}));
     }
 
     this.on = function(nameElement, config) {
@@ -180,6 +180,7 @@ var SIDEBAR = function() {
             if (config.hasOwnProperty('preloadData') && config['preloadData'].constructor === Array)
                 this.setPreloadData(config['preloadData']);
         }
+
         this.load();
         return this;
     };
@@ -271,14 +272,14 @@ var SIDEBAR = function() {
 
     this.getAddElementName = function() {
         if (typeof this.elementName !== 'undefined' && this.elementName !== null)
-            return " Add " + this.elementName;
-        return " Add " + this.getName();
+            return i18next.t('sidebar.add', { defaults: " Add "}) + this.elementName;
+        return i18next.t('sidebar.add', { defaults: " Add "}) + this.getName();
     };
 
     this.getImportElementName = function() {
         if (typeof this.elementName !== 'undefined' && this.elementName !== null)
-            return " Import " + this.elementName;
-        return " Import " + this.getName();
+            return i18next.t('sidebar.import', { defaults: " Import "}) + this.elementName;
+        return i18next.t('sidebar.import', { defaults: " Import "}) + this.getName();
     };
 
     this.setNewElementName = function(name) {
@@ -289,7 +290,7 @@ var SIDEBAR = function() {
         if (typeof this.newElementName !== 'undefined' && this.newElementName !== null) {
             return this.newElementName;
         }
-        return "New " + this.getName();
+        return i18next.t('sidebar.new', { defaults: "New "}) + this.getName();
     };
 
     this.getElements = function() {
@@ -461,7 +462,7 @@ var SIDEBAR = function() {
             this.instructionsLoaded = true;
         else
             this.instructionsLoaded = false;
-    }
+    };
 
     this.addElements = function() {
         var elementsData = this.getElements();
@@ -664,8 +665,11 @@ var SIDEBAR = function() {
             window.location = '#sidebarAddElement';
             document.getElementById("inputName").focus();
         }.bind(this);
-        
-        document.getElementById("addScriptSidebarButton").onclick = this.addScript.bind(this);
+
+        // translate Add Script Button
+        var addScriptButton = document.getElementById("addScriptSidebarButton");
+        addScriptButton.value = i18next.t('script.add', { defaults: "Add Script"});
+        addScriptButton.onclick = this.addScript.bind(this);
         
         li.appendChild(div);
         menuNode.appendChild(li);
